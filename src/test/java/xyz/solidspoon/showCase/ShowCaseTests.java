@@ -28,7 +28,7 @@ class ShowCaseTests {
                 0, tableOneRows,
                 1, tableTwoRows
         );
-        XWPFDocument xwpfDocument = ContractGenerator.generateWord2(wordParams, "template.docx", tableRows);
+        XWPFDocument xwpfDocument = TemplateFiller.generateWord2(wordParams, "template.docx", tableRows);
         //保存到本地
         saveDocumentToFile(xwpfDocument, "output.docx");
 

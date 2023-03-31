@@ -13,7 +13,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ContractGenerator {
+public class TemplateFiller {
 
     public static XWPFDocument generateWord2(Object paramEntity, String template, Map<Integer, List<Optional<Object>>> tableValues) {
         Field[] fields = ReflectUtil.getFields(paramEntity.getClass());
@@ -35,7 +35,7 @@ public class ContractGenerator {
      */
     public static XWPFDocument generateWord(Map<String, ?> param, String template, Map<Integer, List<Optional<Object>>> tableValues) {
         Map<String, String> processedParam = processParam(param);
-        try (InputStream resourceStream = ContractGenerator.class.getClassLoader().getResourceAsStream(template)) {
+        try (InputStream resourceStream = TemplateFiller.class.getClassLoader().getResourceAsStream(template)) {
             assert resourceStream != null;
             XWPFDocument doc = new XWPFDocument(resourceStream);
             List<XWPFParagraph> paragraphList = doc.getParagraphs();
@@ -163,7 +163,7 @@ public class ContractGenerator {
             return;
         }
         List<List<XWPFRun>> collect = paragraphList.stream()
-                .map(ContractGenerator::mergeRuns)
+                .map(TemplateFiller::mergeRuns)
                 .map(XWPFParagraph::getRuns)
                 .toList();
         List<XWPFRun> xwpfRuns = collect.stream()
